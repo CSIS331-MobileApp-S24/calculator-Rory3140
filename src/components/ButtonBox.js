@@ -3,7 +3,7 @@ import "./ButtonBox.css";
 import Button from "./Button.js";
 
 function handleClick(btnValue) {
-  console.log("Button Clicked: " + btnValue);
+  console.log("$" + btnValue + " Clicked");
 }
 
 const ButtonBox = () => {
