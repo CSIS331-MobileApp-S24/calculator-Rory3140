@@ -18,7 +18,13 @@ const ButtonBox = () => {
   return (
     <div className="buttonbox">
       {btnValues.flat().map((button, i) => {
-        return <Button className="" key={i} value={button} onButtonClick={() => handleClick(button)}/>;
+        return (
+          <Button
+            key={i}
+            value={button}
+            onButtonClick={() => handleClick(button)}
+          />
+        );
       })}
     </div>
   );
