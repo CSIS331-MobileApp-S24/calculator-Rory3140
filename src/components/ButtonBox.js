@@ -14,13 +14,12 @@ const ButtonBox = () => {
     ["1", "2", "3", "+"],
     ["0", ".", "="],
   ];
-
   return (
     <div className="buttonbox">
       {btnValues.flat().map((button, i) => {
 
         var classname = "";
-        if (button == "=") {
+        if (button === "=") {
           classname = "equals";
         }
 
