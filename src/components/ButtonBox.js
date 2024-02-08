@@ -18,15 +18,17 @@ const ButtonBox = () => {
   return (
     <div className="buttonbox">
       {btnValues.flat().map((button, i) => {
-        classname = "";
+
+        var classname = "";
         if (button == "=") {
           classname = "equals";
         }
+
         return (
           <Button
             key={i}
-            classname={classname}
             value={button}
+            classname={classname}
             onButtonClick={() => handleClick(button)}
           />
         );
