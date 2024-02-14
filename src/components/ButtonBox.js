@@ -2,11 +2,7 @@ import React from "react";
 import "./ButtonBox.css";
 import Button from "./Button.js";
 
-function handleClick(btnValue) {
-  console.log("Button Clicked: " + btnValue);
-}
-
-const ButtonBox = () => {
+const ButtonBox = ({handleClick}) => {
   const btnValues = [
     ["C", "+-", "%", "/"],
     ["7", "8", "9", "X"],
@@ -28,7 +24,7 @@ const ButtonBox = () => {
             key={i}
             value={button}
             classname={classname}
-            onButtonClick={() => handleClick(button)}
+            onClick={handleClick}
           />
         );
       })}
