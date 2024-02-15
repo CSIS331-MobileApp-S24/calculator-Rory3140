@@ -63,7 +63,7 @@ const Wrapper = () => {
 
   function operClickHandler(value) {
     setOper(value);
-    let result;
+    let result = 0;
     switch (oper) {
       case "+":
         result = res + num;
@@ -75,7 +75,9 @@ const Wrapper = () => {
         result = res * num;
         break;
       case "/":
-        result = res / num;
+        if (num !== 0) {
+          result = res / num;
+        }
         break;
       default:
         result = num;
