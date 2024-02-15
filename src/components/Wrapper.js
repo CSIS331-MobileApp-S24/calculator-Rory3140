@@ -124,10 +124,12 @@ const Wrapper = () => {
   }
 
   function displayNumHandler(value) {
+    if (value.toString().includes(".")) {
+      value = parseFloat(value).toFixed(10).replace(/\.?0+$/, "");
+    }
     if (value.toString().length > 13) {
       value = value.toString().substring(0, 13);
     }
-
     setDisplayNum(value);
   }
 
