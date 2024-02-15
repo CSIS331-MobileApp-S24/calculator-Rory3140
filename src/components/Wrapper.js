@@ -5,6 +5,7 @@ import "./Wrapper.css";
 
 const Wrapper = () => {
   let [num, setNum] = useState(0);
+  let [displayNum, setDisplayNum] = useState(0);
   let [res, setRes] = useState("");
   let [oper, setOper] = useState("");
 
@@ -36,68 +37,78 @@ const Wrapper = () => {
       default:
         numClickHandler(value);
     }
-    console.log("num: " + num);
-    console.log("res: " + res);
-    console.log("oper: " + oper);
   }
 
   function resetClickHandler() {
-    console.log("In resetClickHandler()");
     setNum(0);
+    setDisplayNum(0);
+    setRes("");
     setOper("");
   }
 
   function invertClickHandler() {
-    console.log("In invertClickHandler()");
     num = num * -1;
     setNum(num);
+    displayNumHandler(num);
   }
 
   function percentClickHandler() {
-    console.log("In percentClickHandler()");
     num = num / 100;
     if (num.toString().length > 13) {
       num = num.toExponential(9);
     }
     setNum(num);
+    displayNumHandler(num);
   }
 
   function operClickHandler(value) {
-    console.log("In operClickHandler()");
     setOper(value);
-
-    if (oper === "") {
-      setRes(num);
-      setNum(0);
-    } else {
-
-      let result;
-      switch (oper) {
-        case "+":
-          result = res + num;
-          break;
-      }
-
-      if (result.toString().length > 13) {
-        result = result.toString().substring(0, 13);
-      }
-
-      setRes(result);
-      setNum(result);
+    let result;
+    switch (oper) {
+      case "+":
+        result = res + num;
+        break;
+      case "-":
+        result = res - num;
+        break;
+      case "X":
+        result = res * num;
+        break;
+      case "/":
+        result = res / num;
+        break;
+      default:
+        result = num;
+        break;
     }
+    setNum(0);
+    setRes(result);
+    displayNumHandler(result);
+    
+    // Code to display zero on first click of operator
+    // if (oper === "") {
+    //   displayNumHandler(0);
+    // } else {
+    //   displayNumHandler(result);
+    // }
+    return result;
   }
 
   function equalsClickHandler() {
-    console.log("In equalsClickHandler()");
+    let result = operClickHandler("");
+    setOper("");
+    setNum(result);
   }
 
   function decClickHandler() {
-    console.log("In decClickHandler()");
+    if (!num.toString().includes(".")) {
+      let newValue = num + ".";
+      setNum(newValue);
+      displayNumHandler(newValue);
+    }
   }
 
   function numClickHandler(value) {
-    console.log("In numClickHandler()");
-
     if (num.toString().length < 13) {
       let newValue;
 
@@ -108,12 +119,21 @@ const Wrapper = () => {
       }
       newValue = Number(newValue);
       setNum(newValue);
+      displayNumHandler(newValue);
     }
+  }
+
+  function displayNumHandler(value) {
+    if (value.toString().length > 13) {
+      value = value.toString().substring(0, 13);
+    }
+
+    setDisplayNum(value);
   }
 
   return (
     <div className="wrapper bg-dark-gray pa3 br3">
-      <Screen value={num} />
+      <Screen value={displayNum} />
       <ButtonBox handleClick={onButtonClick} />
     </div>
   );
