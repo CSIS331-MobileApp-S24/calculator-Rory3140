@@ -84,7 +84,7 @@ const Wrapper = () => {
     setNum(0);
     setRes(result);
     displayNumHandler(result);
-    
+
     // Code to display zero on first click of operator
     // if (oper === "") {
     //   displayNumHandler(0);
@@ -125,7 +125,9 @@ const Wrapper = () => {
 
   function displayNumHandler(value) {
     if (value.toString().includes(".")) {
-      value = parseFloat(value).toFixed(10).replace(/\.?0+$/, "");
+      value = parseFloat(value)
+        .toFixed(10)
+        .replace(/\.?0+$/, "");
     }
     if (value.toString().length > 13) {
       value = value.toString().substring(0, 13);
