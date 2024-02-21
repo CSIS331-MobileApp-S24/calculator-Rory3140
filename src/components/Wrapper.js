@@ -86,19 +86,12 @@ const Wrapper = () => {
     setNum(0);
     setRes(result);
     displayNumHandler(result);
-
-    // Code to display zero on first click of operator
-    // if (oper === "") {
-    //   displayNumHandler(0);
-    // } else {
-    //   displayNumHandler(result);
-    // }
     return result;
   }
 
   function equalsClickHandler() {
     let result = operClickHandler("");
-    setOper("");
+    setOper("=");
     setNum(result);
   }
 
@@ -114,12 +107,16 @@ const Wrapper = () => {
     if (num.toString().length < 13) {
       let newValue;
 
-      if (num === 0) {
+      if (num === 0 || oper === "=") {
+        if (oper === "=") {
+          setOper("");
+        }
         newValue = value;
       } else {
         newValue = num + value;
       }
       newValue = Number(newValue);
+
       setNum(newValue);
       displayNumHandler(newValue);
     }
